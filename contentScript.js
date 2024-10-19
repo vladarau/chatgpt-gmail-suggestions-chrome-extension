@@ -14,7 +14,7 @@ function getEmailBody(signatureDelimiter) {
 
 
 async function sendToChatGPT(text, styles, apiKey, signatureDelimiter) {
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+  const response = await fetch('https://api.studio.nebius.ai/v1/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ async function sendToChatGPT(text, styles, apiKey, signatureDelimiter) {
     },
     body: JSON.stringify({
       messages: [{"role": "user", "content": `Review and provide suggestions for the following email draft combining the following styles or only a single style if only one is provided: ${styles.join(', ')}. Please return only the revised email text without suggesting a subject. Email draft: ${text}`}],
-      model: "gpt-3.5-turbo",
+      model: "mmeta-llama/Meta-Llama-3.1-8B-Instruct",
       max_tokens: 150,
       n: 1,
       stop: null,

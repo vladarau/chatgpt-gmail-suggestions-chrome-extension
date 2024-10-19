@@ -10,7 +10,11 @@
     "storage"
   ],
   "host_permissions": [
-    "https://*.google.com/*"
+    "https://*.google.com/*",
+    "https://*.nebius.ai/*"
+  ],
+  "permissions": [
+    "*://*.nebius.ai/*"
   ],
   "action": {
     "default_icon": {
