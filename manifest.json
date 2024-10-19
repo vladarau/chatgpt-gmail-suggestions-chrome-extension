@@ -7,14 +7,12 @@
   "description": "Review and improve email style in Gmail drafts with ChatGPT",
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "*://*.nebius.ai/*"
   ],
   "host_permissions": [
     "https://*.google.com/*",
     "https://*.nebius.ai/*"
-  ],
-  "permissions": [
-    "*://*.nebius.ai/*"
   ],
   "action": {
     "default_icon": {
