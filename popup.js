@@ -1,3 +1,5 @@
+console.log("Popup script loaded");
+
 const apiKeyInput = document.getElementById('apiKeyInput');
 const signatureDelimiterInput = document.getElementById('signatureDelimiter');
 const editApiKeyButton = document.getElementById('editApiKeyButton');
@@ -14,10 +16,19 @@ saveButton.addEventListener("click", () => {
 });
 
 document.getElementById("reviewButton").addEventListener("click", () => {
-  const selectedStyles = Array.from(document.querySelectorAll('input[name="style"]:checked')).map(input => input.value);
+  const selectedStyles = Array.from(
+    document.querySelectorAll('input[name="style"]:checked')
+  ).map(input => input.value);
 
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "reviewEmail", styles: selectedStyles });
+  // Query tabs with Gmail URL
+  chrome.tabs.query({ url: "*://mail.google.com/*" }, tabs => {
+    if (tabs.length > 0) {
+      // Find the active Gmail tab or default to the first one
+      const activeTab = tabs.find(tab => tab.active) || tabs[0];
+      chrome.tabs.sendMessage(activeTab.id, { action: "reviewEmail", styles: selectedStyles });
+    } else {
+      alert("Please open Gmail and select the draft you want to review.");
+    }
   });
 });
 
